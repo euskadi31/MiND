@@ -69,6 +69,19 @@ class SoundExtractor
      */
     public function extractInfos()
     {
+        $formats = array();
+        $streamid = null;
+        
+        foreach($this->_fileInfo->File->track as $track) {
+            if($track->getAttribute('type') == 'Audio' && $track->hasAttribute('streamid')) {
+                $formats[(int)$track->getAttribute('streamid')] = $track->Format;
+            }
+        }
+        
+        if(in_array($this->_priorityFormat, $formats)) {
+            $streamid = (int)array_search($this->_priorityFormat, $formats);
+        }
+        
         foreach($this->_fileInfo->File->track as $track) {
             
             switch($track->getAttribute('type')) {
@@ -77,23 +90,7 @@ class SoundExtractor
                     $this->_data['videoFrameRate'] = (string)$track->Frame_rate;
                     break;
                 case 'Audio':
-                    if($track->hasAttribute('streamid')) {
-                        $formats = array();
-                        foreach($track as $index => $stream) {
-                            $formats[$index] = $stream->Format;
-                        }
-                        
-                        $index = null;
-                        
-                        if(in_array($this->_priorityFormat, $formats)) {
-                            $index = (int)array_search($this->_priorityFormat, $formats);
-                        }
-                        
-                        if(is_int($index)) {
-                            $_track = $track[$index];
-                        } else {
-                            $_track = $track[0];
-                        }
+                    if($track->hasAttribute('streamid') && $track->getAttribute('streamid') == $streamid) {
                         
                         if(isset($track->Codec_ID_Hint)) {
                             $format = (string)$track->Codec_ID_Hint;
@@ -101,11 +98,11 @@ class SoundExtractor
                             $format = (string)$track->Codec_ID;
                         }
                         
-                        $this->_data['audioId']         = (string)$_track->ID;
+                        $this->_data['audioId']         = (string)$track->ID;
                         $this->_data['audioFormat']     = strtolower(str_replace('A_', '', $format));
                         $this->_data['audioBitRate']    = (string)$track->Bit_rate;
                         
-                    } else {
+                    } elseif(!$track->hasAttribute('streamid')) {
                         
                         if(isset($track->Codec_ID_Hint)) {
                             $format = (string)$track->Codec_ID_Hint;
