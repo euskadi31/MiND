@@ -19,6 +19,7 @@ class SoundExtractor
     protected $_data = array();
     protected $_logPath = '.';
     protected $_isInfoExtracted = false;
+    protected $_priorityFormat = 'AC-3';
     
     /**
      *@param string $file
