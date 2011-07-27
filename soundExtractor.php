@@ -15,12 +15,15 @@ require_once 'library/Swift/Console/Color.php';
 
 class SoundExtractor
 {
+    // Version
     protected $_version = '0.1';
+	// Information sur le fichier
     protected $_fileInfo;
     protected $_isVerbose = true;
     protected $_data = array();
     protected $_logPath = '.';
     protected $_isInfoExtracted = false;
+	// Priorité du Format 
     protected $_priorityFormat = 'AC-3';
     
     /**
