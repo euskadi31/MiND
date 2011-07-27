@@ -7,7 +7,8 @@
  * @license    http://creativecommons.org/licenses/by/3.0/     Creative Commons 3.0
  *
  **********************************************************************************/
-error_reporting(E_ALL & E_STRICT);
+
+ error_reporting(E_ALL & E_STRICT);
 
 require_once 'library/Swift/Xml.php';
 require_once 'library/Swift/Console/Color.php';
@@ -28,7 +29,7 @@ class SoundExtractor
      */
     public function __construct($file)
     {
-        echo 'SoundExtracktor.php version ' . $this->_version;
+        echo 'SoundExtractor.php version ' . $this->_version;
         echo " By Axel Etcheverry <axel@etcheverry.biz>" . PHP_EOL;
         
         $this->_checking();
