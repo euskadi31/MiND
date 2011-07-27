@@ -1,11 +1,12 @@
 <?php
-/**
+/***********************************************************************************
  * MiND
  *
- * @category   Mind
+ * @category   MiND
  * @copyright  Copyright (c) 2009 Axel ETCHEVERRY. (http://www.axel-etcheverry.com)
  * @license    http://creativecommons.org/licenses/by/3.0/     Creative Commons 3.0
- */
+ *
+ **********************************************************************************/
 error_reporting(E_ALL & E_STRICT);
 
 require_once 'library/Swift/Xml.php';
