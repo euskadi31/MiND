@@ -1,24 +1,29 @@
 <?php
-/**
+/***********************************************************************************
  * MiND
  *
- * @category   Mind
+ * @category   MiND
  * @copyright  Copyright (c) 2009 Axel ETCHEVERRY. (http://www.axel-etcheverry.com)
  * @license    http://creativecommons.org/licenses/by/3.0/     Creative Commons 3.0
- */
-error_reporting(E_ALL & E_STRICT);
+ *
+ **********************************************************************************/
+
+ error_reporting(E_ALL & E_STRICT);
 
 require_once 'library/Swift/Xml.php';
 require_once 'library/Swift/Console/Color.php';
 
 class SoundExtractor
 {
+    // Version
     protected $_version = '0.1';
+	// Information sur le fichier
     protected $_fileInfo;
     protected $_isVerbose = true;
     protected $_data = array();
     protected $_logPath = '.';
     protected $_isInfoExtracted = false;
+	// Priorité du Format 
     protected $_priorityFormat = 'AC-3';
     
     /**
@@ -27,7 +32,7 @@ class SoundExtractor
      */
     public function __construct($file)
     {
-        echo 'SoundExtracktor.php version ' . $this->_version;
+        echo 'SoundExtractor.php version ' . $this->_version;
         echo " By Axel Etcheverry <axel@etcheverry.biz>" . PHP_EOL;
         
         $this->_checking();
